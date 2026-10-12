@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>ימי הולדת עבריים</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <div class="title"><img src="icons/icon32.png" alt="" width="20" height="20"> ימי הולדת עבריים</div>
+    <div class="today" id="today"></div>
+  </header>
+
+  <nav>
+    <button data-tab="upcoming" class="active">קרובים</button>
+    <button data-tab="missing">להשלמה <span class="count" id="missing-count"></span></button>
+    <button data-tab="all">כולם</button>
+    <button data-tab="settings">הגדרות</button>
+  </nav>
+
+  <main>
+    <section id="tab-upcoming"></section>
+    <section id="tab-missing" hidden>
+      <p class="hint">לחברים האלה פייסבוק לא מציגה שנת לידה. בלי שנה אי אפשר לחשב תאריך עברי.</p>
+      <div id="missing-list"></div>
+    </section>
+    <section id="tab-all" hidden>
+      <input type="search" id="search" placeholder="חיפוש לפי שם">
+      <div id="all-list"></div>
+      <details class="add">
+        <summary>הוספה ידנית</summary>
+        <form id="add-form">
+          <input name="name" placeholder="שם" required>
+          <input name="date" type="date" required>
+          <label><input name="afterSunset" type="checkbox"> נולד/ה אחרי השקיעה</label>
+          <button type="submit">הוספה</button>
+        </form>
+      </details>
+    </section>
+    <section id="tab-settings" hidden>
+      <label class="row">תזכורת נוספת לפני
+        <select id="daysBefore">
+          <option value="0">בלי</option><option value="1">יום</option><option value="2">יומיים</option>
+          <option value="3">3 ימים</option><option value="7">שבוע</option>
+        </select>
+      </label>
+      <label class="row">שעת התראה
+        <select id="notifyHour"></select>
+      </label>
+      <label class="row"><span>סנכרון אוטומטי מפייסבוק</span> <input type="checkbox" id="autoSync"></label>
+      <label class="row">כל
+        <select id="syncEveryDays">
+          <option value="1">יום</option><option value="3">3 ימים</option><option value="7">שבוע</option><option value="30">חודש</option>
+        </select>
+      </label>
+      <p class="hint">דף ימי ההולדת של פייסבוק מציג תאריכים רק לשבוע הקרוב, אז כל סנכרון מוסיף עוד חברים. סנכרון כל 3 ימים יאסוף את כולם במהלך שנה. גם כשאתה פותח בעצמך את דף ימי ההולדת, התוסף קורא אותו.</p>
+    </section>
+  </main>
+
+  <footer>
+    <button id="sync">סנכרון עכשיו</button>
+    <button id="export">ייצוא ליומן</button>
+    <span id="status"></span>
+  </footer>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

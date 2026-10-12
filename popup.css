@@ -1,0 +1,50 @@
+:root {
+  --bg: #ffffff; --surface: #f6f5f1; --text: #1f1e1c; --muted: #6b6a65; --border: #e3e1da;
+  --accent: #534AB7; --accent-bg: #EEEDFE; --warn: #854F0B; --warn-bg: #FAEEDA;
+  --today: #993C1D; --today-bg: #FAECE7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1f1e1c; --surface: #2a2927; --text: #f1efe8; --muted: #a9a79f; --border: #3a3936;
+    --accent: #AFA9EC; --accent-bg: #3C3489; --warn: #FAC775; --warn-bg: #633806;
+    --today: #F5C4B3; --today-bg: #712B13;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; width: 360px; font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Arial, sans-serif; background: var(--bg); color: var(--text); }
+header { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--border); }
+.title { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.today { font-size: 12px; color: var(--muted); }
+nav { display: flex; border-bottom: 1px solid var(--border); }
+nav button { flex: 1; background: none; border: 0; border-bottom: 2px solid transparent; padding: 8px 4px; color: var(--muted); cursor: pointer; font: inherit; font-size: 13px; }
+nav button.active { color: var(--accent); border-bottom-color: var(--accent); }
+.count { font-size: 11px; background: var(--warn-bg); color: var(--warn); border-radius: 8px; padding: 0 6px; }
+main { max-height: 400px; overflow-y: auto; }
+section { padding: 4px 0; }
+.group { font-size: 12px; color: var(--muted); padding: 8px 14px 2px; }
+.item { display: flex; align-items: center; gap: 10px; padding: 8px 14px; border-bottom: 1px solid var(--border); }
+.item:last-child { border-bottom: 0; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--accent-bg); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex: none; }
+.info { flex: 1; min-width: 0; }
+.name { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.name a { color: inherit; text-decoration: none; }
+.name a:hover { text-decoration: underline; }
+.sub { font-size: 12px; color: var(--muted); }
+.pill { font-size: 11px; padding: 2px 8px; border-radius: 8px; background: var(--accent-bg); color: var(--accent); white-space: nowrap; }
+.pill.today { background: var(--today-bg); color: var(--today); }
+.hint { font-size: 12px; color: var(--muted); margin: 8px 14px; }
+.empty { text-align: center; color: var(--muted); padding: 24px 14px; }
+input, select, button { font: inherit; color: var(--text); }
+input[type="search"], input[name], select { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; }
+input[type="search"] { width: calc(100% - 28px); margin: 8px 14px; }
+.year { width: 64px; text-align: center; }
+.sunset { display: flex; align-items: center; gap: 2px; font-size: 11px; color: var(--muted); cursor: pointer; white-space: nowrap; }
+.row { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 14px; }
+.add { margin: 8px 14px; }
+.add summary { cursor: pointer; color: var(--accent); font-size: 13px; }
+.add form { display: grid; gap: 6px; margin-top: 8px; }
+footer { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--border); }
+footer button, .add button { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 5px 10px; cursor: pointer; }
+footer button:hover { border-color: var(--accent); }
+#status { font-size: 12px; color: var(--muted); margin-inline-start: auto; }
+.remove { background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 16px; padding: 0 4px; }
