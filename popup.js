@@ -72,7 +72,8 @@ function render() {
         el('div', { class: 'avatar' }, initials(f.name)),
         el('div', { class: 'info' }, nameLink(f),
           el('div', { class: 'sub' }, `${formatHebrew(f.next.hebrew, false)} · ${f.next.date.getUTCDate()}.${f.next.date.getUTCMonth() + 1} · ${f.next.age}${f.afterSunset ? ' · אחרי השקיעה' : ''}`)),
-        el('span', { class: `pill${f.inDays === 0 ? ' today' : ''}` }, whenLabel(f.inDays))));
+        el('span', { class: `pill${f.inDays === 0 ? ' today' : ''}` }, whenLabel(f.inDays)),
+        f.url ? el('a', { class: 'wish', href: f.url, target: '_blank', title: `כתיבת ברכה בוול של ${f.name}` }, 'ברכה') : null));
     }
   }
 

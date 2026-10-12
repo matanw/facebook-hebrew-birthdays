@@ -25,6 +25,12 @@
     }
   }
 
+  function profileUrl(id) {
+    return id.startsWith('id:')
+      ? `https://www.facebook.com/profile.php?id=${id.slice(3)}`
+      : `https://www.facebook.com/${id}`;
+  }
+
   // The smallest ancestor of a heading that still contains only that one heading.
   function cardOf(heading) {
     let el = heading;
@@ -67,7 +73,7 @@
         date = { day: now.getDate(), month: now.getMonth() + 1, year: null };
         if (age != null) date.year = now.getFullYear() - age;
       }
-      results.push({ id, name, url: link.href.split('?')[0], ...date });
+      results.push({ id, name, url: profileUrl(id), ...date });
     }
     return results;
   }

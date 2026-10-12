@@ -84,13 +84,18 @@ async function notify(friends, settings, notified) {
     const key = `${f.id}|${f.next.date.toISOString().slice(0, 10)}|${f.inDays}`;
     if (notified[key]) continue;
     const when = f.inDays === 0 ? 'היום' : f.inDays === 1 ? 'מחר' : `בעוד ${f.inDays} ימים`;
-    await chrome.notifications.create(`bd|${f.id}|${key}`, {
+    const options = {
       type: 'basic',
       iconUrl: 'icons/icon128.png',
       title: `${when} יום ההולדת העברי של ${f.name}`,
       message: `${formatHebrew(f.next.hebrew)} · ${f.next.age}`,
       priority: 1,
-    });
+    };
+    if (f.url) {
+      options.contextMessage = 'לחיצה פותחת את הוול לכתיבת ברכה';
+      options.buttons = [{ title: 'כתוב ברכה בוול' }];
+    }
+    await chrome.notifications.create(`bd|${f.id}|${key}`, options);
     notified[key] = todayIso;
   }
   // Forget entries older than ~2 weeks.
@@ -100,12 +105,15 @@ async function notify(friends, settings, notified) {
   await chrome.storage.local.set({ notified });
 }
 
-chrome.notifications.onClicked.addListener(async (notifId) => {
+async function openWall(notifId) {
   const id = notifId.split('|')[1];
   const { friends } = await load();
   if (friends[id]?.url) chrome.tabs.create({ url: friends[id].url });
   chrome.notifications.clear(notifId);
-});
+}
+
+chrome.notifications.onClicked.addListener(openWall);
+chrome.notifications.onButtonClicked.addListener(openWall);
 
 async function updateBadge(friends) {
   const soon = upcoming(friends).filter((f) => f.inDays <= 7);
